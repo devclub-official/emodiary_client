@@ -1,16 +1,12 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import SignupForm from "@/components/signup-form";
-import Spline from "@splinetool/react-spline/next";
+import Logo from "@/components/logo";
 
 export default function SignupPage() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-rose-50 via-sky-50 to-purple-50 p-4">
-      <div className="flex justify-center mb-8">
-        <div className="w-64 h-64 relative">
-          <Spline scene="https://prod.spline.design/6lzl8DLDeozAEJyh/scene.splinecode" />
-        </div>
-      </div>
+      <Logo />
 
       <div className="w-full max-w-md mx-auto space-y-8">
         <div className="text-center space-y-4">

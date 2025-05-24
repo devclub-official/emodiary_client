@@ -11,15 +11,15 @@ export default function DashboardPage() {
   const { user } = useAuthStore();
 
   const handleDateClick = (date: string) => {
-    // TODO: 날짜별 일기 작성 페이지로 이동
-    // router.push(`/diary/write?date=${date}`);
+    // 일기 작성 페이지로 이동
+    router.push(`/diary/write?date=${date}`);
     console.log("선택된 날짜:", date);
   };
 
   const handleWriteDiary = () => {
-    // TODO: 오늘 날짜로 일기 작성 페이지 이동
-    // const today = new Date().toISOString().split('T')[0];
-    // router.push(`/diary/write?date=${today}`);
+    // 오늘 날짜로 일기 작성 페이지 이동
+    const today = new Date().toISOString().split("T")[0];
+    router.push(`/diary/write?date=${today}`);
     console.log("일기 작성하기 클릭");
   };
 

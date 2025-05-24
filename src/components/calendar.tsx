@@ -10,6 +10,7 @@ import {
   getDayNames,
   emotionEmojis,
   type CalendarDate,
+  formatDate,
 } from "@/lib/calendar";
 import { useDiaryStore } from "@/lib/store";
 import { loadMockData } from "@/lib/mock-data";
@@ -68,18 +69,31 @@ export default function Calendar({ onDateClick }: CalendarProps) {
     const hasEntry = !!diaryEntry;
     const isClickable = calendarDate.isCurrentMonth;
 
+    // 현재 날짜와 비교하여 미래 날짜인지 확인
+    const today = formatDate(new Date());
+
+    const isFutureDate = calendarDate.fullDate > today;
+    const isActuallyClickable = isClickable && !isFutureDate;
+
     return (
       <button
         key={calendarDate.fullDate}
         onClick={() => handleDateClick(calendarDate)}
-        disabled={!isClickable}
+        disabled={!isActuallyClickable}
         className={`
           relative h-12 w-full flex flex-col items-center justify-center
           transition-all duration-200 rounded-lg
           ${
-            isClickable
+            isActuallyClickable
               ? "hover:bg-purple-50 hover:shadow-sm cursor-pointer"
-              : "cursor-default opacity-30"
+              : "cursor-not-allowed"
+          }
+          ${
+            !calendarDate.isCurrentMonth
+              ? "opacity-30"
+              : isFutureDate
+              ? "opacity-40 bg-gray-50"
+              : ""
           }
           ${
             calendarDate.isToday
@@ -87,7 +101,7 @@ export default function Calendar({ onDateClick }: CalendarProps) {
               : ""
           }
           ${
-            hasEntry && isClickable
+            hasEntry && isActuallyClickable
               ? "bg-gradient-to-br from-rose-50 to-purple-50"
               : ""
           }
@@ -97,16 +111,26 @@ export default function Calendar({ onDateClick }: CalendarProps) {
           className={`
           text-sm font-medium
           ${calendarDate.isToday ? "text-purple-700 font-bold" : ""}
-          ${!calendarDate.isCurrentMonth ? "text-gray-300" : "text-gray-700"}
+          ${
+            !calendarDate.isCurrentMonth
+              ? "text-gray-300"
+              : isFutureDate
+              ? "text-gray-400"
+              : "text-gray-700"
+          }
         `}
         >
           {calendarDate.date}
         </span>
 
-        {hasEntry && diaryEntry && (
+        {hasEntry && diaryEntry && !isFutureDate && (
           <span className="text-lg leading-none mt-0.5">
             {emotionEmojis[diaryEntry.emotion]}
           </span>
+        )}
+
+        {isFutureDate && calendarDate.isCurrentMonth && (
+          <span className="text-xs text-gray-400 mt-0.5">🔒</span>
         )}
       </button>
     );

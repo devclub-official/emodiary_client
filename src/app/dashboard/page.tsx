@@ -5,20 +5,47 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Calendar from "@/components/calendar";
 import { useAuthStore } from "@/lib/store";
+import { useDiaryStore } from "@/lib/store";
+const { formatDate } = require("@/lib/calendar");
 
 export default function DashboardPage() {
   const router = useRouter();
   const { user } = useAuthStore();
 
   const handleDateClick = (date: string) => {
-    // 일기 작성 페이지로 이동
-    router.push(`/diary/write?date=${date}`);
-    console.log("선택된 날짜:", date);
+    // 현재 날짜와 비교하여 미래 날짜는 접근 불가
+    const today = formatDate(new Date());
+    const selectedDate = new Date(date);
+    const currentDate = new Date(today);
+
+    if (selectedDate > currentDate) {
+      // 미래 날짜는 접근 불가
+      console.log("미래 날짜는 접근할 수 없습니다:", date);
+      return;
+    }
+
+    // 해당 날짜에 일기가 있는지 확인
+    const { getEntryByDate } = useDiaryStore.getState();
+    const existingEntry = getEntryByDate(date);
+
+    if (existingEntry) {
+      // 기존 일기가 있으면 상세보기로 이동
+      router.push(`/diary/view?date=${date}`);
+    } else {
+      // 일기가 없으면 작성 페이지로 이동
+      router.push(`/diary/write?date=${date}`);
+    }
+
+    console.log(
+      "선택된 날짜:",
+      date,
+      existingEntry ? "(기존 일기 있음)" : "(새 일기 작성)"
+    );
   };
 
   const handleWriteDiary = () => {
     // 오늘 날짜로 일기 작성 페이지 이동
-    const today = new Date().toISOString().split("T")[0];
+    const today = formatDate(new Date());
     router.push(`/diary/write?date=${today}`);
     console.log("일기 작성하기 클릭");
   };
@@ -77,9 +104,7 @@ export default function DashboardPage() {
                 variant="outline"
                 className="w-full border-purple-200 text-purple-600 hover:bg-purple-50"
                 onClick={() => {
-                  // TODO: 감정 분석 페이지로 이동
-                  // router.push('/analysis');
-                  console.log("감정 분석 페이지로 이동");
+                  router.push("/analysis");
                 }}
               >
                 분석 보기

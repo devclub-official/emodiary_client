@@ -2,47 +2,47 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import DiaryWriteForm from "@/components/diary-write-form";
+import DiaryView from "@/components/diary-view";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, AlertCircle } from "lucide-react";
+import { useDiaryStore } from "@/lib/store";
+import type { DiaryEntry } from "@/lib/calendar";
 import { formatDate } from "@/lib/calendar";
 
-export default function DiaryWritePage() {
+export default function DiaryViewPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { getEntryByDate } = useDiaryStore();
   const [selectedDate, setSelectedDate] = useState<string>("");
-  const [isValidDate, setIsValidDate] = useState(true);
+  const [diaryEntry, setDiaryEntry] = useState<DiaryEntry | null>(null);
 
   useEffect(() => {
     const dateParam = searchParams.get("date");
-    const today = formatDate(new Date());
 
     if (dateParam) {
-      // 미래 날짜 접근 차단 (문자열 비교)
+      // 미래 날짜 접근 차단 (문자열 비교, 로컬 기준)
+      const today = formatDate(new Date());
       if (dateParam > today) {
         router.push("/dashboard");
         return;
       }
 
       setSelectedDate(dateParam);
-      // TODO: PRD 요구사항 - 당일 날짜만 작성 가능하도록 제한
-      // setIsValidDate(dateParam === today);
-      setIsValidDate(true); // 테스트용
-    } else {
-      setSelectedDate(today);
-      setIsValidDate(true);
+      const entry = getEntryByDate(dateParam);
+      setDiaryEntry(entry || null);
     }
-  }, [searchParams, router]);
+  }, [searchParams, getEntryByDate, router]);
 
   const handleBack = () => {
     router.push("/dashboard");
   };
 
   const formatDisplayDate = (dateStr: string) => {
-    // YYYY-MM-DD 직접 파싱 (타임존 문제 방지)
-    const [year, month, day] = dateStr.split("-").map(Number);
-    const date = new Date(year, month - 1, day);
+    const date = new Date(dateStr);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
     const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
     const dayName = dayNames[date.getDay()];
 
@@ -60,7 +60,7 @@ export default function DiaryWritePage() {
     );
   }
 
-  if (!isValidDate) {
+  if (!diaryEntry) {
     return (
       <main className="min-h-screen bg-gradient-to-br from-rose-50 via-sky-50 to-purple-50 p-4">
         <div className="max-w-2xl mx-auto pt-20">
@@ -68,12 +68,12 @@ export default function DiaryWritePage() {
             <div className="text-center">
               <AlertCircle className="w-16 h-16 text-amber-500 mx-auto mb-4" />
               <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-                오늘 날짜만 작성 가능해요
+                작성된 일기가 없어요
               </h2>
               <p className="text-gray-600 mb-6">
-                일기는 당일에만 작성할 수 있어요.
+                선택하신 날짜에는 아직 일기가 작성되지 않았어요.
                 <br />
-                선택하신 날짜: {formatDisplayDate(selectedDate)}
+                날짜: {formatDisplayDate(selectedDate)}
               </p>
               <div className="flex gap-3 justify-center">
                 <Button variant="outline" onClick={handleBack}>
@@ -82,13 +82,12 @@ export default function DiaryWritePage() {
                 </Button>
                 <Button
                   onClick={() => {
-                    const today = formatDate(new Date());
-                    router.push(`/diary/write?date=${today}`);
+                    router.push(`/diary/write?date=${selectedDate}`);
                   }}
                   className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
                 >
                   <Calendar className="w-4 h-4 mr-2" />
-                  오늘 일기 쓰기
+                  일기 작성하기
                 </Button>
               </div>
             </div>
@@ -114,17 +113,15 @@ export default function DiaryWritePage() {
             </Button>
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                감정 일기 작성
+                일기 보기
               </h1>
-              <p className="text-gray-600 text-sm">
-                {formatDisplayDate(selectedDate)}
-              </p>
+              <p className="text-gray-600 text-sm">저장된 일기를 확인하세요</p>
             </div>
           </div>
         </div>
 
-        {/* 일기 작성 폼 */}
-        <DiaryWriteForm date={selectedDate} onBack={handleBack} />
+        {/* 일기 상세보기 */}
+        <DiaryView entry={diaryEntry} date={selectedDate} onBack={handleBack} />
       </div>
     </main>
   );

@@ -4,13 +4,14 @@ import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Calendar from "@/components/calendar";
-import { useAuthStore } from "@/lib/store";
+import { useAuthStore, useThemeStore } from "@/lib/store";
 import { useDiaryStore } from "@/lib/store";
 const { formatDate } = require("@/lib/calendar");
 
 export default function DashboardPage() {
   const router = useRouter();
   const { user } = useAuthStore();
+  const { currentTheme, motivationalQuote } = useThemeStore();
 
   const handleDateClick = (date: string) => {
     // 현재 날짜와 비교하여 미래 날짜는 접근 불가
@@ -51,7 +52,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-rose-50 via-sky-50 to-purple-50 p-4">
+    <main className={`min-h-screen ${currentTheme.background} p-4`}>
       <div className="max-w-6xl mx-auto space-y-8">
         <header className="text-center py-8">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
@@ -120,9 +121,7 @@ export default function DashboardPage() {
                 variant="outline"
                 className="w-full border-purple-200 text-purple-600 hover:bg-purple-50"
                 onClick={() => {
-                  // TODO: 설정 페이지로 이동
-                  // router.push('/settings');
-                  console.log("설정 페이지로 이동");
+                  router.push("/settings");
                 }}
               >
                 설정하기
@@ -132,9 +131,7 @@ export default function DashboardPage() {
         </div>
 
         <div className="text-center text-sm text-gray-500 mt-8">
-          <p className="italic font-light">
-            "매일 조금씩, 당신의 마음을 돌보세요 💝"
-          </p>
+          <p className="italic font-light">"{motivationalQuote}"</p>
         </div>
       </div>
     </main>

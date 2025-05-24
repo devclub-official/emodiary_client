@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, BarChart3, Heart, TrendingUp } from "lucide-react";
-import { useDiaryStore } from "@/lib/store";
+import { useDiaryStore, useThemeStore } from "@/lib/store";
 import EmotionChart from "@/components/emotion-chart";
 import EmotionStats from "@/components/emotion-stats";
 import EmotionTimeline from "@/components/emotion-timeline";
@@ -13,6 +13,7 @@ import EmotionTimeline from "@/components/emotion-timeline";
 export default function AnalysisPage() {
   const router = useRouter();
   const { entries } = useDiaryStore();
+  const { currentTheme } = useThemeStore();
   const [timeRange, setTimeRange] = useState<"week" | "month">("month");
 
   const handleBack = () => {
@@ -20,7 +21,7 @@ export default function AnalysisPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-rose-50 via-sky-50 to-purple-50 p-4">
+    <main className={`min-h-screen ${currentTheme.background} p-4`}>
       <div className="max-w-6xl mx-auto space-y-8">
         {/* 헤더 */}
         <div className="pt-8 pb-4">

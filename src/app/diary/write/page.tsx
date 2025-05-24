@@ -7,10 +7,12 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, AlertCircle } from "lucide-react";
 import { formatDate } from "@/lib/calendar";
+import { useThemeStore } from "@/lib/store";
 
 export default function DiaryWritePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { currentTheme } = useThemeStore();
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [isValidDate, setIsValidDate] = useState(true);
 
@@ -51,7 +53,9 @@ export default function DiaryWritePage() {
 
   if (!selectedDate) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-sky-50 to-purple-50 flex items-center justify-center">
+      <div
+        className={`min-h-screen ${currentTheme.background} flex items-center justify-center`}
+      >
         <div className="text-center">
           <Calendar className="w-12 h-12 text-purple-500 mx-auto mb-4 animate-pulse" />
           <p className="text-gray-600">날짜를 확인하고 있어요...</p>
@@ -62,7 +66,7 @@ export default function DiaryWritePage() {
 
   if (!isValidDate) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-rose-50 via-sky-50 to-purple-50 p-4">
+      <main className={`min-h-screen ${currentTheme.background} p-4`}>
         <div className="max-w-2xl mx-auto pt-20">
           <Card className="p-8 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl border-0 ring-1 ring-gray-200/50">
             <div className="text-center">
@@ -99,7 +103,7 @@ export default function DiaryWritePage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-rose-50 via-sky-50 to-purple-50 p-4">
+    <main className={`min-h-screen ${currentTheme.background} p-4`}>
       <div className="max-w-2xl mx-auto space-y-6">
         {/* 헤더 */}
         <div className="pt-8 pb-4">

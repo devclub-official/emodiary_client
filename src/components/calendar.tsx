@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -125,7 +126,17 @@ export default function Calendar({ onDateClick }: CalendarProps) {
 
         {hasEntry && diaryEntry && !isFutureDate && (
           <span className="text-lg leading-none mt-0.5">
-            {emotionEmojis[diaryEntry.emotion]}
+            {diaryEntry.emotion === "sad" ? (
+              <Image
+                src="/sad.svg"
+                alt="슬픔"
+                width={20}
+                height={20}
+                className="w-5 h-5"
+              />
+            ) : (
+              emotionEmojis[diaryEntry.emotion]
+            )}
           </span>
         )}
 

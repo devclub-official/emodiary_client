@@ -7,9 +7,6 @@ import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/lib/store";
 import { handleOAuthSignup, type AuthProvider } from "@/lib/auth";
 import { Loader2 } from "lucide-react";
-import googleLogo from "@/public/google-logo.svg";
-import naverLogo from "@/public/naver-logo.svg";
-import kakaoLogo from "@/public/kakao-logo.svg";
 
 export default function SignupForm() {
   const router = useRouter();
@@ -59,7 +56,7 @@ export default function SignupForm() {
           {isLoading ? (
             <Loader2 className="w-5 h-5 animate-spin" />
           ) : (
-            <Image src={googleLogo} alt="Google" width={20} height={20} />
+            <Image src="/google-logo.svg" alt="Google" width={20} height={20} />
           )}
           <span className="font-medium text-gray-700">Google로 회원가입</span>
         </Button>
@@ -73,7 +70,7 @@ export default function SignupForm() {
           {isLoading ? (
             <Loader2 className="w-5 h-5 animate-spin" />
           ) : (
-            <Image src={naverLogo} alt="Naver" width={20} height={20} />
+            <Image src="/naver-logo.svg" alt="Naver" width={20} height={20} />
           )}
           <span className="font-medium">네이버로 회원가입</span>
         </Button>
@@ -87,7 +84,7 @@ export default function SignupForm() {
           {isLoading ? (
             <Loader2 className="w-5 h-5 animate-spin" />
           ) : (
-            <Image src={kakaoLogo} alt="Kakao" width={20} height={20} />
+            <Image src="/kakao-logo.svg" alt="Kakao" width={20} height={20} />
           )}
           <span className="font-medium">카카오로 회원가입</span>
         </Button>

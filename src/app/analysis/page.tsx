@@ -76,7 +76,7 @@ export default function AnalysisPage() {
 
         {/* 통계 카드들 */}
         <div className="grid gap-6 md:grid-cols-3">
-          <Card className="p-6">
+          <Card className="p-6 card-stat-3d">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center">
                 <Heart className="w-5 h-5 text-pink-600" />
@@ -91,7 +91,7 @@ export default function AnalysisPage() {
             <p className="text-sm text-muted-foreground">개의 감정 기록</p>
           </Card>
 
-          <Card className="p-6">
+          <Card className="p-6 card-stat-3d">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
                 <BarChart3 className="w-5 h-5 text-blue-600" />
@@ -113,7 +113,7 @@ export default function AnalysisPage() {
             <p className="text-sm text-muted-foreground">개의 새로운 기록</p>
           </Card>
 
-          <Card className="p-6">
+          <Card className="p-6 card-stat-3d">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
                 <TrendingUp className="w-5 h-5 text-green-600" />
@@ -130,7 +130,7 @@ export default function AnalysisPage() {
         {/* 차트 섹션 */}
         <div className="grid gap-8 lg:grid-cols-2">
           {/* 감정 분포 차트 */}
-          <Card className="p-6 h-[450px]">
+          <Card className="p-6 h-[450px] card-3d">
             <h3 className="text-xl font-semibold text-foreground mb-6">
               감정 분포
             </h3>
@@ -138,7 +138,7 @@ export default function AnalysisPage() {
           </Card>
 
           {/* 감정 통계 */}
-          <Card className="p-6">
+          <Card className="p-6 card-3d">
             <h3 className="text-xl font-semibold text-foreground mb-6">
               감정 통계
             </h3>
@@ -147,7 +147,7 @@ export default function AnalysisPage() {
         </div>
 
         {/* 감정 타임라인 */}
-        <Card className="p-6">
+        <Card className="p-6 card-3d">
           <h3 className="text-xl font-semibold text-foreground mb-6">
             감정 타임라인
           </h3>
@@ -155,7 +155,7 @@ export default function AnalysisPage() {
         </Card>
 
         {/* 인사이트 메시지 */}
-        <Card className="p-8 bg-muted/30">
+        <Card className="p-8 bg-muted/30 hero-card-3d">
           <div className="text-center">
             <Sparkles className="w-12 h-12 text-foreground mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-foreground mb-3">

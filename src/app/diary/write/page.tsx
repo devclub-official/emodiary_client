@@ -64,7 +64,7 @@ export default function DiaryWritePage() {
     return (
       <main className="min-h-screen bg-background p-4">
         <div className="max-w-2xl mx-auto pt-20">
-          <Card className="p-8">
+          <Card className="p-8 notification-3d">
             <div className="text-center">
               <AlertCircle className="w-16 h-16 text-amber-500 mx-auto mb-4" />
               <h2 className="text-2xl font-semibold text-foreground mb-2">

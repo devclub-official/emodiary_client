@@ -155,7 +155,7 @@ export default function DiaryWriteForm({ date, onBack }: DiaryWriteFormProps) {
   // 감정 선택 단계
   if (session.isCompleted && !selectedEmotion) {
     return (
-      <Card className="p-8">
+      <Card className="p-8 card-3d">
         <div className="text-center mb-8">
           <Sparkles className="w-12 h-12 text-foreground mx-auto mb-4" />
           <h2 className="text-2xl font-semibold text-foreground mb-2">
@@ -211,7 +211,7 @@ export default function DiaryWriteForm({ date, onBack }: DiaryWriteFormProps) {
   // 완료 후 감정이 선택된 상태
   if (session.isCompleted && selectedEmotion) {
     return (
-      <Card className="p-8">
+      <Card className="p-8 hero-card-3d">
         <div className="text-center">
           <div className="text-6xl mb-4">{emotionEmojis[selectedEmotion]}</div>
           <h2 className="text-2xl font-semibold text-foreground mb-2">
@@ -232,7 +232,7 @@ export default function DiaryWriteForm({ date, onBack }: DiaryWriteFormProps) {
   }
 
   return (
-    <Card className="p-8">
+    <Card className="p-8 card-3d">
       {/* 진행률 표시 */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-3">
@@ -247,9 +247,9 @@ export default function DiaryWriteForm({ date, onBack }: DiaryWriteFormProps) {
             {Math.round(progress)}% 완료
           </span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-3">
+        <div className="w-full bg-gray-200 rounded-full h-3 progress-bar">
           <div
-            className="bg-blue-600 h-3 rounded-full transition-all duration-500"
+            className="bg-blue-600 h-3 rounded-full transition-all duration-500 progress-fill"
             style={{ width: `${progress}%` }}
           ></div>
         </div>

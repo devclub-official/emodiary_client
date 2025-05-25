@@ -266,6 +266,187 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.95);
   }
 
+  /* 기본 카드 3D 효과 - shadcn Card에 적용 가능 */
+  .card-3d {
+    @apply transition-all duration-300 relative;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 6px 0 #d1d5db, 0 8px 20px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .card-3d:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 0 #d1d5db, 0 12px 25px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* 작은 3D 카드 */
+  .card-3d-sm {
+    @apply transition-all duration-200 relative;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 4px 0 #d1d5db, 0 6px 15px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .card-3d-sm:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 #d1d5db, 0 8px 18px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* 대시보드 통계 카드 */
+  .card-stat-3d {
+    @apply p-4 rounded-2xl transition-all duration-300 relative;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    border: 3px solid #e5e7eb;
+    box-shadow: 0 6px 0 #d1d5db, 0 10px 25px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .card-stat-3d:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 4px 0 #d1d5db, 0 15px 30px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+
+  /* 컨텐츠 박스 3D 효과 */
+  .content-box-3d {
+    @apply p-6 rounded-2xl transition-all duration-300 relative;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 5px 0 #d1d5db, 0 8px 20px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .content-box-3d:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 0 #d1d5db, 0 12px 25px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* 패널 3D 효과 */
+  .panel-3d {
+    @apply rounded-xl transition-all duration-300 relative overflow-hidden;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 4px 0 #d1d5db, 0 6px 15px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
+
+  .panel-3d:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 #d1d5db, 0 8px 20px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  /* 다크 3D 카드 */
+  .card-3d-dark {
+    @apply transition-all duration-300 relative;
+    background: linear-gradient(180deg, #4a4a4a 0%, #374151 50%, #2c2c2c 100%);
+    border: 2px solid #374151;
+    box-shadow: 0 6px 0 #1f2937, 0 8px 20px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
+
+  .card-3d-dark:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 0 #1f2937, 0 12px 25px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  /* 액센트 3D 카드 */
+  .card-3d-accent {
+    @apply transition-all duration-300 relative;
+    background: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%);
+    border: 2px solid #d1d5db;
+    box-shadow: 0 6px 0 #9ca3af, 0 8px 20px rgba(156, 163, 175, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .card-3d-accent:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 4px 0 #9ca3af, 0 12px 25px rgba(156, 163, 175, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+
+  /* 인터랙티브 3D 카드 (클릭 효과) */
+  .card-3d-interactive {
+    @apply transition-all duration-200 relative cursor-pointer;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 6px 0 #d1d5db, 0 8px 20px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .card-3d-interactive:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 4px 0 #d1d5db, 0 15px 30px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .card-3d-interactive:active {
+    transform: translateY(1px) scale(0.99);
+    box-shadow: 0 2px 0 #d1d5db, 0 4px 10px rgba(0, 0, 0, 0.1),
+      inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 알림/노티피케이션 3D 박스 */
+  .notification-3d {
+    @apply p-4 rounded-xl transition-all duration-300 relative;
+    background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #f59e0b;
+    box-shadow: 0 4px 0 #d97706, 0 6px 15px rgba(253, 224, 71, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .notification-3d:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 #d97706, 0 8px 18px rgba(253, 224, 71, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
+
+  /* 모달/다이얼로그 3D 효과 */
+  .modal-3d {
+    @apply rounded-2xl transition-all duration-300 relative;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    border: 3px solid #e5e7eb;
+    box-shadow: 0 10px 0 #d1d5db, 0 20px 40px rgba(0, 0, 0, 0.2),
+      inset 0 2px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* 태그/배지 3D 효과 */
+  .badge-3d {
+    @apply px-3 py-1 text-sm font-semibold rounded-lg transition-all duration-200 relative;
+    background: linear-gradient(180deg, #ffffff 0%, #f1f3f4 100%);
+    border: 2px solid #d1d5db;
+    box-shadow: 0 3px 0 #9ca3af, 0 4px 10px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .badge-3d:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 0 #9ca3af, 0 6px 12px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* 대형 히어로 카드 */
+  .hero-card-3d {
+    @apply p-8 rounded-3xl transition-all duration-400 relative;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    border: 4px solid #e5e7eb;
+    box-shadow: 0 12px 0 #d1d5db, 0 20px 50px rgba(0, 0, 0, 0.15),
+      inset 0 2px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .hero-card-3d:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 8px 0 #d1d5db, 0 30px 60px rgba(0, 0, 0, 0.2),
+      inset 0 2px 0 rgba(255, 255, 255, 0.95);
+  }
+
   /* 레벨/스탯 카드 - 검정 배경 */
   .card-stat {
     @apply px-4 py-2 rounded-xl font-bold text-yellow-400 transition-all duration-200 relative;
@@ -508,6 +689,72 @@
 
   .animate-float {
     animation: float 3s ease-in-out infinite;
+  }
+
+  /* 🎮 3D 효과 유틸리티 클래스들 */
+
+  /* 기본 3D 그림자 효과만 적용 */
+  .shadow-3d {
+    box-shadow: 0 4px 0 #d1d5db, 0 6px 15px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .shadow-3d-sm {
+    box-shadow: 0 2px 0 #d1d5db, 0 4px 10px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
+
+  .shadow-3d-lg {
+    box-shadow: 0 8px 0 #d1d5db, 0 12px 30px rgba(0, 0, 0, 0.15),
+      inset 0 2px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .shadow-3d-dark {
+    box-shadow: 0 4px 0 #1f2937, 0 6px 15px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* 호버시 3D 효과 */
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  .hover-lift-sm:hover {
+    transform: translateY(-1px);
+  }
+
+  .hover-lift-lg:hover {
+    transform: translateY(-4px);
+  }
+
+  /* 3D 버튼 베이스 (배경 없이) */
+  .btn-3d-base {
+    @apply transition-all duration-200 relative;
+    border: 2px solid #d1d5db;
+    box-shadow: 0 4px 0 #9ca3af, 0 6px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-3d-base:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 #9ca3af, 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .btn-3d-base:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #9ca3af, 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 프레스 효과 (클릭시 눌리는 느낌) */
+  .press-effect {
+    transition: transform 0.1s ease;
+  }
+
+  .press-effect:active {
+    transform: translateY(2px) scale(0.98);
   }
 
   @keyframes float {

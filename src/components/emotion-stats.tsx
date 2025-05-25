@@ -5,6 +5,7 @@ import {
   type DiaryEntry,
   type EmotionType,
 } from "@/lib/calendar";
+import { TrendingUp, Heart, Palette, Calendar } from "lucide-react";
 
 interface EmotionStatsProps {
   entries: DiaryEntry[];
@@ -31,16 +32,12 @@ export default function EmotionStats({
 
   const filteredEntries = getFilteredEntries();
 
-  // 감정별 카운트 계산
+  // 감정별 카운트 계산 (지원하는 4가지 감정만)
   const emotionCounts: Record<EmotionType, number> = {
     happy: 0,
     sad: 0,
     angry: 0,
     anxious: 0,
-    excited: 0,
-    calm: 0,
-    confused: 0,
-    grateful: 0,
   };
 
   filteredEntries.forEach((entry) => {
@@ -53,10 +50,6 @@ export default function EmotionStats({
       sad: "슬픔",
       angry: "화남",
       anxious: "불안",
-      excited: "신남",
-      calm: "평온",
-      confused: "혼란",
-      grateful: "감사",
     };
     return labels[emotion];
   }
@@ -68,13 +61,8 @@ export default function EmotionStats({
     { emotion: "happy" as EmotionType, count: 0 }
   );
 
-  // 긍정적 감정 비율 계산
-  const positiveEmotions: EmotionType[] = [
-    "happy",
-    "excited",
-    "calm",
-    "grateful",
-  ];
+  // 긍정적 감정 비율 계산 (happy만 긍정적 감정으로 간주)
+  const positiveEmotions: EmotionType[] = ["happy"];
   const positiveCount = positiveEmotions.reduce(
     (sum, emotion) => sum + emotionCounts[emotion],
     0
@@ -93,8 +81,8 @@ export default function EmotionStats({
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
-          <div className="text-4xl mb-3">📈</div>
-          <p className="text-gray-500">
+          <TrendingUp className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+          <p className="text-muted-foreground">
             {timeRange === "week" ? "최근 1주일" : "최근 1개월"} 동안의 감정
             기록이 없어요
           </p>
@@ -106,15 +94,15 @@ export default function EmotionStats({
   return (
     <div className="space-y-6">
       {/* 주요 감정 */}
-      <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl">
+      <div className="text-center p-4 bg-accent/30 rounded-xl">
         <div className="text-3xl mb-2">{emotionEmojis[maxEmotion.emotion]}</div>
-        <h4 className="font-semibold text-gray-800 mb-1">
+        <h4 className="font-semibold text-foreground mb-1">
           가장 많이 느낀 감정
         </h4>
-        <p className="text-lg font-medium text-purple-600">
+        <p className="text-lg font-medium text-foreground">
           {getEmotionLabel(maxEmotion.emotion)}
         </p>
-        <p className="text-sm text-gray-600 mt-1">
+        <p className="text-sm text-muted-foreground mt-1">
           {maxEmotion.count}번 (
           {Math.round((maxEmotion.count / filteredEntries.length) * 100)}%)
         </p>
@@ -122,42 +110,44 @@ export default function EmotionStats({
 
       {/* 통계 목록 */}
       <div className="space-y-4">
-        <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+        <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg border border-border">
           <div className="flex items-center gap-2">
-            <span className="text-lg">😊</span>
-            <span className="text-gray-700">긍정적 감정</span>
+            <Heart className="w-5 h-5 text-pink-600" />
+            <span className="text-foreground">긍정적 감정</span>
           </div>
           <div className="text-right">
-            <div className="font-semibold text-gray-800">
+            <div className="font-semibold text-foreground">
               {positivePercentage}%
             </div>
-            <div className="text-xs text-gray-500">{positiveCount}회</div>
+            <div className="text-xs text-muted-foreground">
+              {positiveCount}회
+            </div>
           </div>
         </div>
 
-        <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+        <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg border border-border">
           <div className="flex items-center gap-2">
-            <span className="text-lg">🎨</span>
-            <span className="text-gray-700">감정 다양성</span>
+            <Palette className="w-5 h-5 text-purple-600" />
+            <span className="text-foreground">감정 다양성</span>
           </div>
           <div className="text-right">
-            <div className="font-semibold text-gray-800">
+            <div className="font-semibold text-foreground">
               {emotionVariety}가지
             </div>
-            <div className="text-xs text-gray-500">감정 표현</div>
+            <div className="text-xs text-muted-foreground">감정 표현</div>
           </div>
         </div>
 
-        <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+        <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg border border-border">
           <div className="flex items-center gap-2">
-            <span className="text-lg">📅</span>
-            <span className="text-gray-700">기록 일수</span>
+            <Calendar className="w-5 h-5 text-blue-600" />
+            <span className="text-foreground">기록 일수</span>
           </div>
           <div className="text-right">
-            <div className="font-semibold text-gray-800">
+            <div className="font-semibold text-foreground">
               {filteredEntries.length}일
             </div>
-            <div className="text-xs text-gray-500">
+            <div className="text-xs text-muted-foreground">
               {timeRange === "week" ? "최근 1주일" : "최근 1개월"}
             </div>
           </div>
@@ -165,10 +155,10 @@ export default function EmotionStats({
       </div>
 
       {/* 인사이트 메시지 */}
-      <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+      <div className="p-4 bg-blue-50 rounded-xl border border-blue-200">
         <div className="text-center">
-          <div className="text-2xl mb-2">💡</div>
-          <p className="text-sm text-gray-700 leading-relaxed">
+          <TrendingUp className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+          <p className="text-sm text-foreground leading-relaxed">
             {positivePercentage >= 70
               ? "정말 행복한 시간을 보내고 계시네요! 이 긍정적인 에너지를 계속 유지해보세요."
               : positivePercentage >= 50

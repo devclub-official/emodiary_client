@@ -6,8 +6,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-outfit);
+  --font-mono: var(--font-inter);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -37,6 +37,10 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-emotion-happy: var(--emotion-happy);
+  --color-emotion-sad: var(--emotion-sad);
+  --color-emotion-angry: var(--emotion-angry);
+  --color-emotion-anxious: var(--emotion-anxious);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -44,84 +48,524 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* 🎨 깔끔한 게임 UI 색상 팔레트 */
+  --radius: 16px;
+
+  /* 메인 배경 - 따뜻한 크림색 */
+  --background: #fbf8f3;
+  --foreground: #2c2c2c;
+
+  /* 카드 배경 - 부드러운 흰색 */
+  --card: #ffffff;
+  --card-foreground: #2c2c2c;
+
+  /* 팝오버 */
+  --popover: #ffffff;
+  --popover-foreground: #2c2c2c;
+
+  /* 메인 색상 - 다크 그레이 */
+  --primary: #4a4a4a;
+  --primary-foreground: #ffffff;
+
+  /* 세컨더리 - 연한 그레이 */
+  --secondary: #f1f1f1;
+  --secondary-foreground: #2c2c2c;
+
+  /* Muted - 연한 베이지/크림 */
+  --muted: #f5f1eb;
+  --muted-foreground: #6b7280;
+
+  /* 액센트 - 연한 그레이 */
+  --accent: #f3f4f6;
+  --accent-foreground: #2c2c2c;
+
+  /* 경고색 - 부드러운 코랄 */
+  --destructive: #fb7185;
+  --destructive-foreground: #ffffff;
+
+  /* 테두리 - 연한 그레이 */
+  --border: #e5e7eb;
+  --input: #ffffff;
+  --ring: #4a4a4a;
+
+  /* 게임 UI 감정 색상 - 파스텔톤 */
+  --emotion-happy: #fde047; /* 따뜻한 노란색 */
+  --emotion-sad: #7dd3fc; /* 부드러운 하늘색 */
+  --emotion-angry: #fda4af; /* 연한 핑크 */
+  --emotion-anxious: #c4b5fd; /* 연보라색 */
+
+  /* 추가 게임 색상 */
+  --success: #86efac; /* 민트 그린 */
+  --warning: #fcd34d; /* 따뜻한 노랑 */
+  --info: #93c5fd; /* 연한 블루 */
+
+  /* 게임 UI 다크 색상 */
+  --game-dark: #2c2c2c; /* 진한 회색 */
+  --game-darker: #1a1a1a; /* 더 진한 회색 */
+
+  /* 사이드바 */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #2c2c2c;
+  --sidebar-primary: #4a4a4a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f5f1eb;
+  --sidebar-accent-foreground: #2c2c2c;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #4a4a4a;
+
+  /* 차트 색상 */
+  --chart-1: var(--emotion-happy);
+  --chart-2: var(--emotion-sad);
+  --chart-3: var(--emotion-angry);
+  --chart-4: var(--emotion-anxious);
+  --chart-5: var(--success);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* 다크모드는 밝은 파스텔로 유지 */
+  --background: #2d2b3a;
+  --foreground: #f8f7fa;
+  --card: #3d3b4a;
+  --card-foreground: #f8f7fa;
+  --popover: #3d3b4a;
+  --popover-foreground: #f8f7fa;
+  --primary: #a855f7;
+  --primary-foreground: #ffffff;
+  --secondary: #4a3b5c;
+  --secondary-foreground: #f8f7fa;
+  --muted: #4a3b5c;
+  --muted-foreground: #9ca3af;
+  --accent: #4a3b5c;
+  --accent-foreground: #f8f7fa;
+  --destructive: #fb7185;
+  --border: #4a3b5c;
+  --input: #3d3b4a;
+  --ring: #a855f7;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-medium;
+    font-family: var(--font-outfit), var(--font-inter), -apple-system,
+      BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /* 부드러운 스크롤바 */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--muted);
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--primary) 80%, black);
+  }
+}
+
+@layer components {
+  /* 🎮 게임 스타일 컴포넌트 */
+
+  /* 메인 게임 버튼 - 흰색 배경, 검정 텍스트 */
+  .btn-game {
+    @apply px-6 py-4 rounded-2xl font-bold transition-all duration-200 relative overflow-hidden;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 50%, #f1f3f4 100%);
+    border: 3px solid #d1d5db;
+    box-shadow: 0 4px 0 #9ca3af, 0 8px 20px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    color: #2c2c2c !important;
+  }
+
+  .btn-game:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 #9ca3af, 0 6px 20px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+    color: #2c2c2c !important;
+  }
+
+  .btn-game:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #9ca3af, 0 2px 10px rgba(0, 0, 0, 0.15),
+      inset 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    color: #2c2c2c !important;
+  }
+
+  /* 강조 게임 버튼 - 다크 그레이 */
+  .btn-game-primary {
+    @apply px-6 py-4 rounded-2xl font-bold text-white transition-all duration-200 relative;
+    background: linear-gradient(180deg, #6b7280 0%, #4b5563 50%, #374151 100%);
+    border: 3px solid #4b5563;
+    box-shadow: 0 4px 0 #374151, 0 8px 20px rgba(75, 85, 99, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .btn-game-primary:hover {
+    transform: translateY(-1px);
+    background: linear-gradient(180deg, #9ca3af 0%, #6b7280 50%, #4b5563 100%);
+    box-shadow: 0 3px 0 #374151, 0 6px 20px rgba(75, 85, 99, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  .btn-game-primary:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #374151, 0 2px 10px rgba(75, 85, 99, 0.4),
+      inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  /* 세컨더리 버튼 - 동일한 흰색 스타일 */
+  .btn-secondary {
+    @apply px-6 py-4 rounded-2xl font-bold text-gray-800 transition-all duration-200 relative;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 50%, #f1f3f4 100%);
+    border: 3px solid #d1d5db;
+    box-shadow: 0 4px 0 #9ca3af, 0 8px 20px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    color: #828080 !important;
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-1px);
+    background: linear-gradient(180deg, #f8f9fa 0%, #f1f3f4 50%, #e5e7eb 100%);
+    box-shadow: 0 3px 0 #9ca3af, 0 6px 20px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #9ca3af, 0 2px 10px rgba(0, 0, 0, 0.15),
+      inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 게임 카드 - 3D 효과 */
+  .card-game {
+    @apply rounded-3xl p-6 transition-all duration-300 relative;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    border: 3px solid #e5e7eb;
+    box-shadow: 0 8px 0 #d1d5db, 0 12px 30px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .card-game:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 0 #d1d5db, 0 16px 40px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+
+  /* 레벨/스탯 카드 - 검정 배경 */
+  .card-stat {
+    @apply px-4 py-2 rounded-xl font-bold text-yellow-400 transition-all duration-200 relative;
+    background: linear-gradient(180deg, #404040 0%, #2c2c2c 50%, #1a1a1a 100%);
+    border: 2px solid #4a4a4a;
+    box-shadow: 0 3px 0 #1a1a1a, 0 6px 15px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  }
+
+  /* 프로그레스 바 - 빨간색 */
+  .progress-bar {
+    @apply h-8 rounded-xl relative overflow-hidden;
+    background: linear-gradient(180deg, #374151 0%, #1f2937 100%);
+    border: 2px solid #4b5563;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .progress-fill {
+    @apply h-full rounded-lg transition-all duration-500;
+    background: linear-gradient(180deg, #f87171 0%, #ef4444 50%, #dc2626 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 0 10px rgba(239, 68, 68, 0.5);
+  }
+
+  /* 감정 카드 */
+  .emotion-card {
+    @apply rounded-2xl p-4 transition-all duration-300 cursor-pointer relative;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    border: 3px solid transparent;
+    box-shadow: 0 4px 0 #e5e7eb, 0 8px 20px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .emotion-card:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 3px 0 #e5e7eb, 0 12px 25px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .emotion-card-happy {
+    background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+    border-color: var(--emotion-happy);
+    box-shadow: 0 4px 0 #f59e0b, 0 8px 20px rgba(253, 224, 71, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .emotion-card-sad {
+    background: linear-gradient(180deg, #dbeafe 0%, #bfdbfe 100%);
+    border-color: var(--emotion-sad);
+    box-shadow: 0 4px 0 #3b82f6, 0 8px 20px rgba(125, 211, 252, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .emotion-card-angry {
+    background: linear-gradient(180deg, #fecaca 0%, #fca5a5 100%);
+    border-color: var(--emotion-angry);
+    box-shadow: 0 4px 0 #ef4444, 0 8px 20px rgba(253, 164, 175, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .emotion-card-anxious {
+    background: linear-gradient(180deg, #ede9fe 0%, #ddd6fe 100%);
+    border-color: var(--emotion-anxious);
+    box-shadow: 0 4px 0 #8b5cf6, 0 8px 20px rgba(196, 181, 253, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  /* 입력 필드 */
+  .input-game {
+    @apply w-full px-4 py-3 rounded-2xl border-3 transition-all duration-300;
+    background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+    border-color: #d1d5db;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1),
+      0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .input-game:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1),
+      0 0 0 3px rgba(168, 85, 247, 0.2), 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* 제목 텍스트 */
+  .text-game-title {
+    @apply text-3xl font-bold mb-2;
+    color: var(--foreground);
+    text-shadow: 0 2px 4px rgba(44, 44, 44, 0.3);
+  }
+
+  .text-game-subtitle {
+    @apply text-lg text-muted-foreground;
+  }
+
+  /* 🗓️ 캘린더 날짜 버튼 스타일 */
+
+  /* 기본 날짜 버튼 - 평평한 스타일 */
+  .btn-calendar-default {
+    @apply px-2 py-2 rounded-xl font-medium transition-all duration-200 relative;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    color: #6b7280 !important;
+  }
+
+  .btn-calendar-default:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    color: #374151 !important;
+  }
+
+  .btn-calendar-default:active {
+    background: #f3f4f6;
+    color: #374151 !important;
+  }
+
+  /* 오늘 날짜 버튼 */
+  .btn-calendar-today {
+    @apply px-2 py-2 rounded-xl font-bold transition-all duration-200 relative overflow-hidden;
+    background: linear-gradient(180deg, #4a4a4a 0%, #374151 50%, #2c2c2c 100%);
+    border: 2px solid #2c2c2c;
+    box-shadow: 0 3px 0 #1a1a1a, 0 6px 15px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+  }
+
+  .btn-calendar-today:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 0 #1a1a1a, 0 4px 15px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+    color: #ffffff !important;
+  }
+
+  .btn-calendar-today:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #1a1a1a, 0 2px 8px rgba(0, 0, 0, 0.3),
+      inset 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+    color: #ffffff !important;
+  }
+
+  /* 기쁨 감정 날짜 버튼 */
+  .btn-calendar-happy {
+    @apply px-2 py-2 rounded-xl font-bold transition-all duration-200 relative overflow-hidden;
+    background: linear-gradient(180deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
+    border: 2px solid #f59e0b;
+    box-shadow: 0 3px 0 #d97706, 0 6px 15px rgba(253, 224, 71, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+    color: #92400e !important;
+  }
+
+  .btn-calendar-happy:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 0 #d97706, 0 4px 15px rgba(253, 224, 71, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+    color: #92400e !important;
+  }
+
+  .btn-calendar-happy:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #d97706, 0 2px 8px rgba(253, 224, 71, 0.4),
+      inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    color: #92400e !important;
+  }
+
+  /* 슬픔 감정 날짜 버튼 */
+  .btn-calendar-sad {
+    @apply px-2 py-2 rounded-xl font-bold transition-all duration-200 relative overflow-hidden;
+    background: linear-gradient(180deg, #dbeafe 0%, #bfdbfe 50%, #60a5fa 100%);
+    border: 2px solid #3b82f6;
+    box-shadow: 0 3px 0 #2563eb, 0 6px 15px rgba(125, 211, 252, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+    color: #1e40af !important;
+  }
+
+  .btn-calendar-sad:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 0 #2563eb, 0 4px 15px rgba(125, 211, 252, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+    color: #1e40af !important;
+  }
+
+  .btn-calendar-sad:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #2563eb, 0 2px 8px rgba(125, 211, 252, 0.4),
+      inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    color: #1e40af !important;
+  }
+
+  /* 화남 감정 날짜 버튼 */
+  .btn-calendar-angry {
+    @apply px-2 py-2 rounded-xl font-bold transition-all duration-200 relative overflow-hidden;
+    background: linear-gradient(180deg, #fecaca 0%, #fca5a5 50%, #f87171 100%);
+    border: 2px solid #ef4444;
+    box-shadow: 0 3px 0 #dc2626, 0 6px 15px rgba(253, 164, 175, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+    color: #b91c1c !important;
+  }
+
+  .btn-calendar-angry:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 0 #dc2626, 0 4px 15px rgba(253, 164, 175, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+    color: #b91c1c !important;
+  }
+
+  .btn-calendar-angry:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #dc2626, 0 2px 8px rgba(253, 164, 175, 0.4),
+      inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    color: #b91c1c !important;
+  }
+
+  /* 불안 감정 날짜 버튼 */
+  .btn-calendar-anxious {
+    @apply px-2 py-2 rounded-xl font-bold transition-all duration-200 relative overflow-hidden;
+    background: linear-gradient(180deg, #ede9fe 0%, #ddd6fe 50%, #a78bfa 100%);
+    border: 2px solid #8b5cf6;
+    box-shadow: 0 3px 0 #7c3aed, 0 6px 15px rgba(196, 181, 253, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+    color: #6b21a8 !important;
+  }
+
+  .btn-calendar-anxious:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 0 #7c3aed, 0 4px 15px rgba(196, 181, 253, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+    color: #6b21a8 !important;
+  }
+
+  .btn-calendar-anxious:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #7c3aed, 0 2px 8px rgba(196, 181, 253, 0.4),
+      inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    color: #6b21a8 !important;
   }
 }
 
 @layer utilities {
+  /* 🎨 유틸리티 애니메이션 */
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .animate-bounce-gentle {
+    animation: bounceGentle 2s ease-in-out infinite;
+  }
+
+  @keyframes bounceGentle {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  .animate-wiggle {
+    animation: wiggle 0.5s ease-in-out;
+  }
+
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-2deg);
+    }
+    75% {
+      transform: rotate(2deg);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .animate-bounce-slow {
     animation: bounce 3s infinite;
   }

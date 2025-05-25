@@ -149,7 +149,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-medium;
+    @apply text-foreground font-medium;
     font-family: var(--font-outfit), var(--font-inter), -apple-system,
       BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
     font-weight: 500;

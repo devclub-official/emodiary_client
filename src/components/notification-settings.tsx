@@ -166,7 +166,7 @@ export default function NotificationSettings() {
               type="time"
               value={notificationTime}
               onChange={handleTimeChange}
-              className="flex-1 p-2 border border-border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-400 bg-background text-foreground input-game"
+              className="flex-1 p-2 border border-border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-400   text-foreground input-game"
             />
             <Button
               onClick={sendTestNotification}

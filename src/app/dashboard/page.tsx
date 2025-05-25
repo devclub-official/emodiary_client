@@ -59,7 +59,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen">
       <div className="max-w-7xl mx-auto p-6 space-y-8">
         {/* 헤더 */}
         <header className="space-y-6">
@@ -243,7 +243,7 @@ export default function DashboardPage() {
         </div>
 
         {/* 명언 섹션 */}
-        <Card className="p-6 text-center bg-muted/30 card-3d-accent">
+        <Card className="p-6 text-center bg-muted/30 card-3d">
           <p className="text-lg font-medium text-foreground italic">
             "{motivationalQuote}"
           </p>

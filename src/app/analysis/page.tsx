@@ -27,7 +27,7 @@ export default function AnalysisPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background p-4">
+    <main className="min-h-screen   p-4">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* 헤더 */}
         <div className="pt-8 pb-4">

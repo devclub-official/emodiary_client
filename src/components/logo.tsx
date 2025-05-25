@@ -58,7 +58,7 @@ export default function Logo() {
           width="140"
           height="140"
           viewBox="0 0 140 140"
-          className="drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
+          className="drop-shadow-2xl transition-transform duration-300 group-hover:scale-110"
         >
           🌸 배경 원 - 파스텔 그라데이션
           <circle
@@ -179,7 +179,7 @@ export default function Logo() {
         </svg>
 
         {/* 🌈 호버 효과 */}
-        <div className="absolute inset-0 bg-primary/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-primary/20 rounded-full opacity-0 transition-opacity duration-300"></div>
       </div>
     </div>
   );

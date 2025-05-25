@@ -51,7 +51,7 @@ export default function DiaryWritePage() {
 
   if (!selectedDate) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen   flex items-center justify-center">
         <div className="text-center">
           <Calendar className="w-12 h-12 text-foreground mx-auto mb-4 animate-pulse" />
           <p className="text-muted-foreground">날짜를 확인하고 있어요...</p>
@@ -62,7 +62,7 @@ export default function DiaryWritePage() {
 
   if (!isValidDate) {
     return (
-      <main className="min-h-screen bg-background p-4">
+      <main className="min-h-screen   p-4">
         <div className="max-w-2xl mx-auto pt-20">
           <Card className="p-8 notification-3d">
             <div className="text-center">
@@ -103,7 +103,7 @@ export default function DiaryWritePage() {
   }
 
   return (
-    <main className="min-h-screen bg-background p-4">
+    <main className="min-h-screen   p-4">
       <div className="max-w-2xl mx-auto space-y-6">
         {/* 헤더 */}
         <div className="pt-8 pb-4">

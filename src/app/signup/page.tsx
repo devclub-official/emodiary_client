@@ -5,44 +5,59 @@ import Logo from "@/components/logo";
 
 export default function SignupPage() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-rose-50 via-sky-50 to-purple-50 p-4">
-      <Logo />
+    <main className="min-h-screen flex flex-col items-center justify-center p-4 animate-fade-in">
+      {/* 게임 스타일 배경 */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 right-10 w-20 h-20 bg-[#FDE047]/30 rounded-full animate-float"></div>
+        <div className="absolute top-32 left-16 w-16 h-16 bg-[#7DD3FC]/40 rounded-full animate-bounce-gentle"></div>
+        <div className="absolute bottom-20 right-20 w-24 h-24 bg-secondary/20 rounded-full animate-float"></div>
+        <div className="absolute bottom-40 left-10 w-12 h-12 bg-primary/50 rounded-full animate-bounce-gentle"></div>
+      </div>
 
-      <div className="w-full max-w-md mx-auto space-y-8">
+      {/* 메인 콘텐츠 */}
+      <div className="relative z-10 w-full max-w-md mx-auto space-y-8">
+        {/* 로고 섹션 */}
+        <div className="text-center">
+          <Logo />
+        </div>
+
+        {/* 타이틀 섹션 */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            마음의 날씨
-          </h1>
-          <p className="text-gray-600 text-lg leading-relaxed">
+          <h1 className="text-game-title">감정 캐릭터와 만나요</h1>
+          <p className="text-game-subtitle">
             회원가입하고
             <br />
-            <span className="text-purple-600 font-medium">감정 일기 여정</span>
-            을 시작하세요
+            <span className="text-primary font-bold">감정 친구들</span>과 함께
+            시작해요
           </p>
         </div>
 
-        <Card className="p-8 backdrop-blur-sm bg-white/90 shadow-2xl rounded-2xl border-0 ring-1 ring-gray-200/50">
+        {/* 회원가입 카드 */}
+        <Card className="card-game">
           <SignupForm />
 
           <div className="mt-8 text-center">
-            <p className="text-gray-600 text-sm">
-              이미 계정이 있으신가요?{" "}
+            <p className="text-muted-foreground text-sm">
+              이미 계정이 있나요?{" "}
               <Link
                 href="/"
-                className="text-purple-600 hover:text-purple-700 font-medium hover:underline transition-colors duration-200"
+                className="text-primary hover:text-primary/80 font-semibold hover:underline transition-all duration-200"
               >
-                로그인
+                로그인하기
               </Link>
             </p>
           </div>
         </Card>
 
-        <div className="text-center text-sm text-gray-500 mt-8">
-          <p className="italic font-light leading-relaxed">
-            "당신의 감정을 기록하고
-            <br />
-            성장하는 여정을 시작하세요 🌱"
-          </p>
+        {/* 하단 메시지 */}
+        <div className="text-center text-sm text-muted-foreground">
+          <div className="p-4 rounded-2xl bg-accent/30 border border-border">
+            <p className="font-medium leading-relaxed">
+              새로운 감정 여행을 시작하고
+              <br />
+              캐릭터 친구들과 성장해요
+            </p>
+          </div>
         </div>
       </div>
     </main>

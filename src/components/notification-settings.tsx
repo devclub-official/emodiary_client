@@ -99,11 +99,11 @@ export default function NotificationSettings() {
   return (
     <div className="space-y-6">
       {/* 브라우저 알림 권한 상태 */}
-      <div className="p-4 bg-gray-50 rounded-lg">
+      <div className="p-4">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <Bell className="w-4 h-4 text-gray-600" />
-            <span className="text-sm font-medium text-gray-700">
+            <Bell className="w-4 h-4 text-foreground" />
+            <span className="text-sm font-medium text-foreground">
               브라우저 알림 권한
             </span>
           </div>
@@ -118,29 +118,29 @@ export default function NotificationSettings() {
             onClick={requestNotificationPermission}
             disabled={isLoading || permission === "denied"}
             size="sm"
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+            className="w-full btn-game"
           >
             {isLoading ? "요청 중..." : "알림 권한 요청"}
           </Button>
         )}
 
         {permission === "denied" && (
-          <div className="text-xs text-gray-600 mt-2">
+          <div className="text-xs text-muted-foreground mt-2">
             브라우저 설정에서 알림을 허용해주세요.
           </div>
         )}
       </div>
 
       {/* 알림 활성화 토글 */}
-      <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+      <div className="flex items-center justify-between p-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Bell className="w-4 h-4 text-gray-600" />
-            <span className="text-sm font-medium text-gray-700">
+            <Bell className="w-4 h-4 text-foreground" />
+            <span className="text-sm font-medium text-foreground">
               일기 작성 알림
             </span>
           </div>
-          <p className="text-xs text-gray-600">
+          <p className="text-xs text-muted-foreground">
             매일 설정한 시간에 일기 작성을 알려드려요
           </p>
         </div>
@@ -153,10 +153,12 @@ export default function NotificationSettings() {
 
       {/* 알림 시간 설정 */}
       {notificationsEnabled && permission === "granted" && (
-        <div className="p-4 bg-gray-50 rounded-lg">
+        <div className="p-4">
           <div className="flex items-center gap-2 mb-3">
-            <Clock className="w-4 h-4 text-gray-600" />
-            <span className="text-sm font-medium text-gray-700">알림 시간</span>
+            <Clock className="w-4 h-4 text-foreground" />
+            <span className="text-sm font-medium text-foreground">
+              알림 시간
+            </span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -164,33 +166,33 @@ export default function NotificationSettings() {
               type="time"
               value={notificationTime}
               onChange={handleTimeChange}
-              className="flex-1 p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-200 focus:border-purple-300"
+              className="flex-1 p-2 border border-border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-400   text-foreground input-game"
             />
             <Button
               onClick={sendTestNotification}
               size="sm"
               variant="outline"
-              className="border-purple-200 text-purple-600 hover:bg-purple-50"
+              className="btn-secondary"
             >
               테스트
             </Button>
           </div>
 
-          <p className="text-xs text-gray-600 mt-2">
+          <p className="text-xs text-muted-foreground mt-2">
             매일 {notificationTime}에 알림을 받게 됩니다
           </p>
         </div>
       )}
 
       {/* 알림 설명 */}
-      <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100">
+      <div className="p-4">
         <div className="flex items-start gap-3">
           <div className="text-lg">💡</div>
           <div>
-            <h4 className="text-sm font-medium text-gray-800 mb-2">
+            <h4 className="text-sm font-medium text-foreground mb-2">
               알림 기능 안내
             </h4>
-            <ul className="text-xs text-gray-600 space-y-1">
+            <ul className="text-xs text-muted-foreground space-y-1">
               <li>• 매일 설정한 시간에 일기 작성을 알려드려요</li>
               <li>• 연속 기록을 놓치지 않도록 도와드려요</li>
               <li>• 감정 기록 습관을 만들어보세요</li>

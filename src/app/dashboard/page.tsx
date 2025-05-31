@@ -6,6 +6,13 @@ import { Button } from "@/components/ui/button";
 import Calendar from "@/components/calendar";
 import { useAuthStore, useThemeStore } from "@/lib/store";
 import { useDiaryStore } from "@/lib/store";
+import {
+  PenTool,
+  BarChart3,
+  Settings,
+  User,
+  Calendar as CalendarIcon,
+} from "lucide-react";
 const { formatDate } = require("@/lib/calendar");
 
 export default function DashboardPage() {
@@ -52,87 +59,195 @@ export default function DashboardPage() {
   };
 
   return (
-    <main className={`min-h-screen ${currentTheme.background} p-4`}>
-      <div className="max-w-6xl mx-auto space-y-8">
-        <header className="text-center py-8">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-            마음의 날씨
-          </h1>
-          <p className="text-gray-600">
-            {user?.name ? `${user.name}님, ` : ""}오늘의 감정을 기록해보세요
-          </p>
-        </header>
-
-        <div className="grid gap-8 lg:grid-cols-3">
-          {/* 캘린더 섹션 */}
-          <div className="lg:col-span-2">
-            <div className="mb-4">
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                감정 캘린더
-              </h2>
-              <p className="text-sm text-gray-600">
-                날짜를 클릭하여 해당 날의 일기를 확인하거나 작성하세요
+    <main className="min-h-screen">
+      <div className="max-w-7xl mx-auto p-6 space-y-8">
+        {/* 헤더 */}
+        <header className="space-y-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-foreground mb-2">
+                감정 캐릭터 다이어리
+              </h1>
+              <p className="text-muted-foreground">
+                {user?.name ? (
+                  <>
+                    안녕하세요,{" "}
+                    <span className="font-semibold text-foreground">
+                      {user.name}
+                    </span>
+                    님!
+                  </>
+                ) : (
+                  "오늘의 감정을 기록해보세요"
+                )}
               </p>
             </div>
-            <Calendar onDateClick={handleDateClick} />
+            <div className="flex items-center gap-4">
+              <Button onClick={handleWriteDiary} className="btn-game h-11 px-6">
+                <PenTool className="w-4 h-4 mr-2" />
+                일기 작성
+              </Button>
+              <Button
+                variant="outline"
+                className="btn-game h-11 px-4"
+                onClick={() => router.push("/settings")}
+              >
+                <Settings className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+
+          {/* 빠른 액션 카드들 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Card
+              className="p-4 card-3d-interactive"
+              onClick={handleWriteDiary}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <PenTool className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">오늘의 일기</h3>
+                  <p className="text-sm text-muted-foreground">
+                    감정을 기록하세요
+                  </p>
+                </div>
+              </div>
+            </Card>
+
+            <Card
+              className="p-4 card-3d-interactive"
+              onClick={() => router.push("/analysis")}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                  <BarChart3 className="w-5 h-5 text-green-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">감정 분석</h3>
+                  <p className="text-sm text-muted-foreground">
+                    패턴을 확인하세요
+                  </p>
+                </div>
+              </div>
+            </Card>
+
+            <Card
+              className="p-4 card-3d-interactive"
+              onClick={() => router.push("/profile")}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <User className="w-5 h-5 text-purple-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">프로필</h3>
+                  <p className="text-sm text-muted-foreground">
+                    설정을 관리하세요
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </header>
+
+        {/* 메인 컨텐츠 */}
+        <div className="grid gap-8 lg:grid-cols-4">
+          {/* 캘린더 섹션 */}
+          <div className="lg:col-span-3">
+            <div className="mb-6">
+              <div className="flex items-center gap-3 mb-2">
+                <CalendarIcon className="w-6 h-6 text-foreground" />
+                <h2 className="text-xl font-bold text-foreground">
+                  감정 캘린더
+                </h2>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                날짜를 클릭하여 일기를 작성하거나 확인하세요
+              </p>
+            </div>
+            <Card className="p-6 card-3d">
+              <Calendar onDateClick={handleDateClick} />
+            </Card>
           </div>
 
           {/* 사이드바 */}
           <div className="space-y-6">
-            <Card className="p-6 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl border-0 ring-1 ring-gray-200/50">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                오늘의 일기
+            {/* 이번 주 요약 */}
+            <Card className="p-6 card-3d-sm">
+              <h3 className="font-semibold text-foreground mb-4">
+                이번 주 요약
               </h3>
-              <p className="text-gray-600 mb-6 text-sm">
-                AI와 함께 오늘 하루의 감정을 기록해보세요.
-              </p>
-              <Button
-                onClick={handleWriteDiary}
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
-              >
-                일기 작성하기
-              </Button>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">
+                    작성한 일기
+                  </span>
+                  <span className="font-semibold text-foreground">5일</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">
+                    주요 감정
+                  </span>
+                  <span className="font-semibold text-foreground">😊 기쁨</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="bg-blue-600 h-2 rounded-full w-4/5"></div>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  이번 주 80% 완성
+                </p>
+              </div>
             </Card>
 
-            <Card className="p-6 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl border-0 ring-1 ring-gray-200/50">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                감정 분석
-              </h3>
-              <p className="text-gray-600 mb-6 text-sm">
-                최근 감정 패턴을 분석하고 인사이트를 확인하세요.
-              </p>
-              <Button
-                variant="outline"
-                className="w-full border-purple-200 text-purple-600 hover:bg-purple-50"
-                onClick={() => {
-                  router.push("/analysis");
-                }}
-              >
-                분석 보기
-              </Button>
+            {/* 빠른 메모 */}
+            <Card className="p-6 card-3d-sm">
+              <h3 className="font-semibold text-foreground mb-4">빠른 메모</h3>
+              <textarea
+                className="w-full h-24 p-3 border border-border rounded-lg resize-none text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent input-game"
+                placeholder="오늘의 생각을 간단히 적어보세요..."
+              />
+              <Button className="btn-game w-full mt-3 h-9 text-sm">저장</Button>
             </Card>
 
-            <Card className="p-6 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl border-0 ring-1 ring-gray-200/50">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">설정</h3>
-              <p className="text-gray-600 mb-6 text-sm">
-                알림 설정 및 개인 정보를 관리하세요.
-              </p>
-              <Button
-                variant="outline"
-                className="w-full border-purple-200 text-purple-600 hover:bg-purple-50"
-                onClick={() => {
-                  router.push("/settings");
-                }}
-              >
-                설정하기
-              </Button>
+            {/* 감정 통계 */}
+            <Card className="p-6 card-3d-sm">
+              <h3 className="font-semibold text-foreground mb-4">최근 감정</h3>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                  <span className="text-sm text-muted-foreground">기쁨</span>
+                  <span className="text-sm font-medium ml-auto">40%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
+                  <span className="text-sm text-muted-foreground">평온</span>
+                  <span className="text-sm font-medium ml-auto">30%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                  <span className="text-sm text-muted-foreground">
+                    스트레스
+                  </span>
+                  <span className="text-sm font-medium ml-auto">20%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
+                  <span className="text-sm text-muted-foreground">기타</span>
+                  <span className="text-sm font-medium ml-auto">10%</span>
+                </div>
+              </div>
             </Card>
           </div>
         </div>
 
-        <div className="text-center text-sm text-gray-500 mt-8">
-          <p className="italic font-light">"{motivationalQuote}"</p>
-        </div>
+        {/* 명언 섹션 */}
+        <Card className="p-6 text-center bg-muted/30 card-3d">
+          <p className="text-lg font-medium text-foreground italic">
+            "{motivationalQuote}"
+          </p>
+        </Card>
       </div>
     </main>
   );

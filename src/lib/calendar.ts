@@ -1,13 +1,5 @@
-// 감정 타입 정의
-export type EmotionType =
-  | "happy"
-  | "sad"
-  | "angry"
-  | "anxious"
-  | "excited"
-  | "calm"
-  | "confused"
-  | "grateful";
+// 감정 타입 정의 (실제 지원하는 4가지 감정만)
+export type EmotionType = "happy" | "sad" | "angry" | "anxious";
 
 // 감정 이모티콘 매핑
 export const emotionEmojis: Record<EmotionType, string> = {
@@ -15,10 +7,6 @@ export const emotionEmojis: Record<EmotionType, string> = {
   sad: "😢",
   angry: "😠",
   anxious: "😰",
-  excited: "🤩",
-  calm: "😌",
-  confused: "😕",
-  grateful: "🥰",
 };
 
 // 일기 데이터 타입

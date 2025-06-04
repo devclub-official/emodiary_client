@@ -60,7 +60,7 @@ export default function DashboardPage() {
 
   return (
     <main className="min-h-screen">
-      <div className="max-w-7xl mx-auto p-6 space-y-8">
+      <div className="max-w-7xl mx-auto p-6 space-y-8 max-sm:p-4">
         {/* 헤더 */}
         <header className="space-y-6">
           <div className="flex items-center justify-between">
@@ -167,7 +167,7 @@ export default function DashboardPage() {
                 날짜를 클릭하여 일기를 작성하거나 확인하세요
               </p>
             </div>
-            <Card className="p-6 card-3d">
+            <Card className="p-6 card-3d max-sm:p-2">
               <Calendar onDateClick={handleDateClick} />
             </Card>
           </div>
@@ -175,7 +175,7 @@ export default function DashboardPage() {
           {/* 사이드바 */}
           <div className="space-y-6">
             {/* 이번 주 요약 */}
-            <Card className="p-6 card-3d-sm">
+            <Card className="p-6 card-3d-sm max-sm:p-4">
               <h3 className="font-semibold text-foreground mb-4">
                 이번 주 요약
               </h3>
@@ -200,19 +200,8 @@ export default function DashboardPage() {
                 </p>
               </div>
             </Card>
-
-            {/* 빠른 메모 */}
-            <Card className="p-6 card-3d-sm">
-              <h3 className="font-semibold text-foreground mb-4">빠른 메모</h3>
-              <textarea
-                className="w-full h-24 p-3 border border-border rounded-lg resize-none text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent input-game"
-                placeholder="오늘의 생각을 간단히 적어보세요..."
-              />
-              <Button className="btn-game w-full mt-3 h-9 text-sm">저장</Button>
-            </Card>
-
             {/* 감정 통계 */}
-            <Card className="p-6 card-3d-sm">
+            <Card className="p-6 card-3d-sm max-sm:p-4">
               <h3 className="font-semibold text-foreground mb-4">최근 감정</h3>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
@@ -243,7 +232,7 @@ export default function DashboardPage() {
         </div>
 
         {/* 명언 섹션 */}
-        <Card className="p-6 text-center bg-muted/30 card-3d">
+        <Card className="p-6 text-center bg-muted/30 card-3d max-sm:p-4">
           <p className="text-lg font-medium text-foreground italic">
             "{motivationalQuote}"
           </p>

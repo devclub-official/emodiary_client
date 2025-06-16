@@ -1,32 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useAuthStore } from "@/lib/store";
 import { handleOAuthLogin, type AuthProvider } from "@/lib/auth";
-import { Loader2, Sparkles, AlertCircle } from "lucide-react";
+import { Sparkles } from "lucide-react";
+import { redirect } from "next/navigation";
 
 export default function LoginForm() {
-  const router = useRouter();
-  const { login, isLoading } = useAuthStore();
-  const [error, setError] = useState<string | null>(null);
-
-  const handleSocialLogin = async (provider: AuthProvider) => {
-    setError(null);
-
-    const result = await handleOAuthLogin(provider);
-
-    if (result.success && result.user) {
-      login(result.user);
-      // TODO: 로그인 이력 저장 API 호출
-      // await saveLoginHistory(result.user.id, result.user.provider);
-      router.push("/dashboard");
-      console.log("로그인 성공:", result.user);
-    } else {
-      setError(result.error || "로그인에 실패했습니다.");
-    }
+  const handleSocialLogin = async (formData: FormData) => {
+    const provider = formData.get("provider") as AuthProvider;
+    const url = await handleOAuthLogin(provider);
+    console.log(url);
+    redirect(url as string);
   };
 
   return (
@@ -44,69 +29,29 @@ export default function LoginForm() {
         </p>
       </div>
 
-      {error && (
-        <div className="p-4 text-sm text-destructive-foreground bg-red-50 border-2 border-red-200 rounded-2xl animate-wiggle">
-          <div className="flex items-center gap-2">
-            <AlertCircle className="w-4 h-4" />
-            <span>{error}</span>
-          </div>
-        </div>
-      )}
-
-      <div className="space-y-4">
+      <form action={handleSocialLogin} className="space-y-4">
         <Button
           variant="outline"
           className="w-full h-14 text-base bg-white hover:bg-gray-50 text-gray-700 border-gray-300 hover:border-gray-400 transition-all duration-300 rounded-2xl font-bold shadow-lg hover:shadow-xl"
-          onClick={() => handleSocialLogin("google")}
-          disabled={isLoading}
+          type="submit"
+          name="provider"
+          value="google"
         >
-          {isLoading ? (
-            <Loader2 className="w-5 h-5 animate-spin" />
-          ) : (
-            <>
-              <Image
-                src="/google-logo.svg"
-                alt="Google"
-                width={24}
-                height={24}
-              />
-              <span className="font-bold ml-3">Google로 계속하기</span>
-            </>
-          )}
-        </Button>
-
-        <Button
-          variant="outline"
-          className="w-full h-14 text-base bg-[#03C75A] hover:bg-[#02b350] text-white border-[#03C75A] hover:border-[#02b350] transition-all duration-300 rounded-2xl font-bold shadow-lg hover:shadow-xl"
-          onClick={() => handleSocialLogin("naver")}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <Loader2 className="w-5 h-5 animate-spin" />
-          ) : (
-            <>
-              <Image src="/naver-logo.svg" alt="Naver" width={24} height={24} />
-              <span className="ml-3">네이버로 계속하기</span>
-            </>
-          )}
+          <Image src="/google-logo.svg" alt="Google" width={24} height={24} />
+          <span className="font-bold ml-3">Google로 계속하기</span>
         </Button>
 
         <Button
           variant="outline"
           className="w-full h-14 text-base bg-[#FEE500] hover:bg-[#e6cf00] text-black border-[#FEE500] hover:border-[#e6cf00] transition-all duration-300 rounded-2xl font-bold shadow-lg hover:shadow-xl"
-          onClick={() => handleSocialLogin("kakao")}
-          disabled={isLoading}
+          type="submit"
+          name="provider"
+          value="kakao"
         >
-          {isLoading ? (
-            <Loader2 className="w-5 h-5 animate-spin" />
-          ) : (
-            <>
-              <Image src="/kakao-logo.svg" alt="Kakao" width={24} height={24} />
-              <span className="ml-3">카카오로 계속하기</span>
-            </>
-          )}
+          <Image src="/kakao-logo.svg" alt="Kakao" width={24} height={24} />
+          <span className="ml-3">카카오로 계속하기</span>
         </Button>
-      </div>
+      </form>
 
       <div className="text-center text-xs text-muted-foreground">
         <div className="p-3 rounded-xl bg-muted/50 border border-border">

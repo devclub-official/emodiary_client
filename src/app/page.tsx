@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import LoginForm from "@/components/login-form";
 import Logo from "@/components/logo";
@@ -35,18 +34,6 @@ export default function Home() {
         {/* 🎮 로그인 카드 */}
         <Card className="card-game">
           <LoginForm />
-
-          <div className="mt-8 text-center">
-            <p className="text-muted-foreground text-sm">
-              아직 계정이 없나요?{" "}
-              <Link
-                href="/signup"
-                className="text-primary hover:text-primary/80 font-semibold hover:underline transition-all duration-200"
-              >
-                회원가입하기
-              </Link>
-            </p>
-          </div>
         </Card>
 
         {/* 🌸 하단 메시지 */}

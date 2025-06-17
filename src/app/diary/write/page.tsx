@@ -77,7 +77,7 @@ export default function DiaryWritePage() {
               </p>
               <div className="flex gap-3 justify-center">
                 <Button
-                  variant="outline"
+                  variant="default"
                   onClick={handleBack}
                   className="btn-secondary"
                 >
@@ -109,7 +109,7 @@ export default function DiaryWritePage() {
         <div className="pt-8 pb-4">
           <div className="flex items-center gap-4 mb-4">
             <Button
-              variant="ghost"
+              variant="default"
               size="sm"
               onClick={handleBack}
               className="btn-game h-10 w-10 p-0"

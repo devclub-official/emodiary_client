@@ -171,7 +171,7 @@ export default function NotificationSettings() {
             <Button
               onClick={sendTestNotification}
               size="sm"
-              variant="outline"
+              variant="default"
               className="btn-secondary"
             >
               테스트

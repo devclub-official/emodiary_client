@@ -4,14 +4,18 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { handleOAuthLogin, type AuthProvider } from "@/lib/auth";
 import { Sparkles } from "lucide-react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
+  const router = useRouter();
+
   const handleSocialLogin = async (formData: FormData) => {
     const provider = formData.get("provider") as AuthProvider;
     const url = await handleOAuthLogin(provider);
-    console.log(url);
-    redirect(url as string);
+
+    if (typeof url === "string") {
+      router.push(url);
+    }
   };
 
   return (
@@ -31,7 +35,7 @@ export default function LoginForm() {
 
       <form action={handleSocialLogin} className="space-y-4">
         <Button
-          variant="outline"
+          variant="default"
           className="w-full h-14 text-base bg-white hover:bg-gray-50 text-gray-700 border-gray-300 hover:border-gray-400 transition-all duration-300 rounded-2xl font-bold shadow-lg hover:shadow-xl"
           type="submit"
           name="provider"
@@ -39,17 +43,6 @@ export default function LoginForm() {
         >
           <Image src="/google-logo.svg" alt="Google" width={24} height={24} />
           <span className="font-bold ml-3">Google로 계속하기</span>
-        </Button>
-
-        <Button
-          variant="outline"
-          className="w-full h-14 text-base bg-[#FEE500] hover:bg-[#e6cf00] text-black border-[#FEE500] hover:border-[#e6cf00] transition-all duration-300 rounded-2xl font-bold shadow-lg hover:shadow-xl"
-          type="submit"
-          name="provider"
-          value="kakao"
-        >
-          <Image src="/kakao-logo.svg" alt="Kakao" width={24} height={24} />
-          <span className="ml-3">카카오로 계속하기</span>
         </Button>
       </form>
 

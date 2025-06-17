@@ -12,14 +12,14 @@ export default async function CallbackPage({
   );
 
   if (response.ok) {
-    const { accessToken, refreshToken } = await response.json();
+    const { access_token, refresh_token } = await response.json();
     const cookieStore = await cookies();
 
-    cookieStore.set("accessToken", accessToken, {
+    cookieStore.set("access_token", access_token, {
       httpOnly: true,
       path: "/",
     });
-    cookieStore.set("refreshToken", refreshToken, {
+    cookieStore.set("refresh_token", refresh_token, {
       httpOnly: true,
       path: "/",
     });

@@ -189,7 +189,7 @@ export default function DiaryWriteForm({ date, onBack }: DiaryWriteFormProps) {
 
         <div className="flex gap-3">
           <Button
-            variant="outline"
+            variant="default"
             onClick={onBack}
             className="btn-secondary flex-1"
           >
@@ -285,7 +285,7 @@ export default function DiaryWriteForm({ date, onBack }: DiaryWriteFormProps) {
 
         <div className="flex gap-3">
           <Button
-            variant="outline"
+            variant="default"
             onClick={onBack}
             className="btn-secondary flex-1"
           >

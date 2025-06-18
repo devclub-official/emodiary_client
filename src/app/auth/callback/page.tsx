@@ -4,12 +4,19 @@ import { cookies } from "next/headers";
 export default async function CallbackPage({
   searchParams,
 }: {
-  searchParams: Promise<{ code: string }>;
+  searchParams: Promise<string>;
 }) {
-  const { code } = await searchParams;
+  const currentParams = new URLSearchParams(await searchParams);
   const response = await fetch(
-    `${process.env.API_BASE_URL}/api/login/google?code=${code}`
+    `${process.env.API_BASE_URL}/api/login/google?${currentParams.toString()}`
   );
+
+  if (!response.ok) {
+    if (response.status === 500) {
+      currentParams.set("loginError", "serverError");
+      redirect("/");
+    }
+  }
 
   if (response.ok) {
     const { access_token, refresh_token } = await response.json();
@@ -24,8 +31,8 @@ export default async function CallbackPage({
       path: "/",
     });
 
-    redirect("/");
+    redirect("/dashboard");
   }
 
-  return <div>CallbackPage</div>;
+  return <div>callback page</div>;
 }

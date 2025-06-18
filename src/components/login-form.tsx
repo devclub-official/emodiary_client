@@ -1,13 +1,25 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { handleOAuthLogin, type AuthProvider } from "@/lib/auth";
 import { Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 
 export default function LoginForm() {
+  const searchParams = useSearchParams();
   const router = useRouter();
+
+  useEffect(() => {
+    if (searchParams.get("loginError") === "serverError") {
+      toast("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+    } else {
+      toast("로그인에 실패했습니다.");
+    }
+  }, [searchParams]);
 
   const handleSocialLogin = async (formData: FormData) => {
     const provider = formData.get("provider") as AuthProvider;

@@ -41,7 +41,7 @@ export default function SettingsPage() {
         <div className="pt-8 pb-4">
           <div className="flex items-center gap-4 mb-6">
             <Button
-              variant="ghost"
+              variant="default"
               size="sm"
               onClick={handleBack}
               className="btn-game h-10 w-10 p-0"

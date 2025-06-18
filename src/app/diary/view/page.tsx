@@ -79,7 +79,7 @@ export default function DiaryViewPage() {
                 날짜: {formatDisplayDate(selectedDate)}
               </p>
               <div className="flex gap-3 justify-center">
-                <Button variant="outline" onClick={handleBack}>
+                <Button variant="default" onClick={handleBack}>
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   돌아가기
                 </Button>
@@ -107,7 +107,7 @@ export default function DiaryViewPage() {
         <div className="pt-8 pb-4">
           <div className="flex items-center gap-4 mb-4">
             <Button
-              variant="ghost"
+              variant="default"
               size="sm"
               onClick={handleBack}
               className="hover:bg-white/50"

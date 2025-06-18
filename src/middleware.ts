@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 export const middleware = (request: NextRequest) => {
   const { pathname } = request.nextUrl;
 
-  const accessToken = request.cookies.get("accessToken");
-  const refreshToken = request.cookies.get("refreshToken");
+  const accessToken = request.cookies.get("access_token");
+  const refreshToken = request.cookies.get("refresh_token");
 
   if (!accessToken && !refreshToken && pathname !== "/") {
     return NextResponse.redirect(new URL("/", request.url));

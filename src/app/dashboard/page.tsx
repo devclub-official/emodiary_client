@@ -88,7 +88,7 @@ export default function DashboardPage() {
                 일기 작성
               </Button>
               <Button
-                variant="outline"
+                variant="default"
                 className="btn-game h-11 px-4"
                 onClick={() => router.push("/settings")}
               >

@@ -74,7 +74,7 @@ export default function DiaryView({ entry, date, onBack }: DiaryViewProps) {
       {/* 헤더 */}
       <div className="flex items-center gap-4 mb-8">
         <Button
-          variant="ghost"
+          variant="default"
           size="sm"
           onClick={onBack}
           className="hover:bg-purple-50"
@@ -167,7 +167,7 @@ export default function DiaryView({ entry, date, onBack }: DiaryViewProps) {
             기록해보세요!
           </p>
           <Button
-            variant="outline"
+            variant="default"
             onClick={onBack}
             className="border-purple-200 text-purple-600 hover:bg-purple-50"
           >

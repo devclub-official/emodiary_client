@@ -139,7 +139,7 @@ export default function Calendar({ onDateClick }: CalendarProps) {
       {/* 캘린더 헤더 */}
       <div className="flex items-center justify-between p-4 rounded-2xl bg-accent/30 border border-border">
         <Button
-          variant="ghost"
+          variant="default"
           size="sm"
           onClick={handlePrevMonth}
           className="btn-game h-10 w-10 p-0"
@@ -155,7 +155,7 @@ export default function Calendar({ onDateClick }: CalendarProps) {
         </div>
 
         <Button
-          variant="ghost"
+          variant="default"
           size="sm"
           onClick={handleNextMonth}
           className="btn-game h-10 w-10 p-0"

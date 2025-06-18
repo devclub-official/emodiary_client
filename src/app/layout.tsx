@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/providers";
+import { Toaster } from "@/components/ui/sonner";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${outfit.variable} ${inter.variable} antialiased`}>
         <Providers>{children}</Providers>
+        <Toaster position="top-center" />
       </body>
     </html>
   );

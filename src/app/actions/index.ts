@@ -2,13 +2,22 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { SearchParams } from "../auth/callback/page";
+import { TypeSearchParams } from "../auth/callback/page";
 
-export async function getUser(currentParams: SearchParams) {
-  const params = await currentParams;
+export async function getUser(params: Awaited<TypeSearchParams>) {
+  const searchParams = new URLSearchParams();
+  Object.entries(params).forEach(([k, v]) => {
+    if (Array.isArray(v)) {
+      v.forEach((item) => {
+        if (item !== undefined) searchParams.append(k, item);
+      });
+    } else if (v !== undefined) {
+      searchParams.append(k, v);
+    }
+  });
 
   const response = await fetch(
-    `${process.env.API_BASE_URL}/api/login/google?${params.toString()}`
+    `${process.env.API_BASE_URL}/api/login/google?${searchParams.toString()}`
   );
 
   console.warn(response);

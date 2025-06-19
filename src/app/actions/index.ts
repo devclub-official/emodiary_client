@@ -5,8 +5,10 @@ import { redirect } from "next/navigation";
 import { SearchParams } from "../auth/callback/page";
 
 export async function getUser(currentParams: SearchParams) {
+  const params = await currentParams;
+
   const response = await fetch(
-    `${process.env.API_BASE_URL}/api/login/google?${currentParams.toString()}`
+    `${process.env.API_BASE_URL}/api/login/google?${params.toString()}`
   );
 
   if (!response.ok) {

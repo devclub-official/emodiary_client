@@ -1,5 +1,4 @@
-import { getUser } from "@/app/actions";
-import { redirect } from "next/navigation";
+import SetCookieWithActionProvider from "./_components/useSetCookieWithAction";
 
 export type TypeSearchParams = Promise<{
   [key: string]: string | string[] | undefined;
@@ -11,19 +10,10 @@ export default async function CallbackPage({
   searchParams: TypeSearchParams;
 }) {
   const params = await searchParams;
-  const response = await getUser(params);
 
-  if (response.status === 200) {
-    redirect("/dashboard");
-  }
-
-  if (response.status === 400) {
-    redirect("/?loginError=serverError");
-  }
-
-  if (response.status === 500) {
-    redirect("/?loginError=serverError");
-  }
-
-  return <div>callback page</div>;
+  return (
+    <SetCookieWithActionProvider params={params}>
+      <div>callback page</div>
+    </SetCookieWithActionProvider>
+  );
 }

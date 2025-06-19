@@ -11,6 +11,8 @@ export async function getUser(currentParams: SearchParams) {
     `${process.env.API_BASE_URL}/api/login/google?${params.toString()}`
   );
 
+  console.warn(response);
+
   if (!response.ok) {
     if (response.status === 500) {
       redirect("/?loginError=serverError");

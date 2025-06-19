@@ -6,6 +6,10 @@ export const middleware = (request: NextRequest) => {
   const accessToken = request.cookies.get("access_token");
   const refreshToken = request.cookies.get("refresh_token");
 
+  if (process.env.NODE_ENV === "development") {
+    return NextResponse.next();
+  }
+
   if (!accessToken && !refreshToken && pathname !== "/") {
     return NextResponse.redirect(new URL("/", request.url));
   }

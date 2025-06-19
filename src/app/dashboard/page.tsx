@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Calendar from "@/components/calendar";
 import { useAuthStore, useThemeStore } from "@/lib/store";
 import { useDiaryStore } from "@/lib/store";
+import LogoutButton from "@/components/logout-button";
 import {
   PenTool,
   BarChart3,
@@ -87,6 +88,7 @@ export default function DashboardPage() {
                 <PenTool className="w-4 h-4 mr-2" />
                 일기 작성
               </Button>
+              <LogoutButton />
               <Button
                 variant="default"
                 className="btn-game h-11 px-4"

@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import LoginForm from "@/components/login-form";
 import Logo from "@/components/logo";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -33,7 +34,9 @@ export default function Home() {
 
         {/* 🎮 로그인 카드 */}
         <Card className="card-game">
-          <LoginForm />
+          <Suspense>
+            <LoginForm />
+          </Suspense>
         </Card>
 
         {/* 🌸 하단 메시지 */}

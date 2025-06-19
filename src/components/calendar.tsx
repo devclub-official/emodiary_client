@@ -109,7 +109,11 @@ export default function Calendar({ onDateClick }: CalendarProps) {
         className={`
           relative h-16 w-full flex flex-col items-center justify-center
           ${getButtonStyle()}
-          ${isActuallyClickable ? "cursor-pointer" : "cursor-not-allowed"}
+          ${
+            isActuallyClickable
+              ? "cursor-pointer btn-game"
+              : "cursor-not-allowed"
+          }
         `}
       >
         <span className="text-sm font-bold mb-1">{calendarDate.date}</span>
@@ -135,11 +139,11 @@ export default function Calendar({ onDateClick }: CalendarProps) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       {/* 캘린더 헤더 */}
       <div className="flex items-center justify-between p-4 rounded-2xl bg-accent/30 border border-border">
         <Button
-          variant="default"
+          variant="outline"
           size="sm"
           onClick={handlePrevMonth}
           className="btn-game h-10 w-10 p-0"
@@ -151,11 +155,10 @@ export default function Calendar({ onDateClick }: CalendarProps) {
           <h2 className="text-2xl font-bold text-foreground">
             {year}년 {getMonthName(month)}
           </h2>
-          <p className="text-sm text-muted-foreground">감정 캐릭터들의 달력</p>
         </div>
 
         <Button
-          variant="default"
+          variant="outline"
           size="sm"
           onClick={handleNextMonth}
           className="btn-game h-10 w-10 p-0"
@@ -165,7 +168,7 @@ export default function Calendar({ onDateClick }: CalendarProps) {
       </div>
 
       {/* 캘린더 본체 */}
-      <div className="p-6 rounded-3xl bg-card border-2 border-border shadow-lg">
+      <div className="p-2 rounded-3xl bg-card border shadow-lg">
         {/* 요일 헤더 */}
         <div className="grid grid-cols-7 gap-2 mb-4">
           {dayNames.map((day, index) => (

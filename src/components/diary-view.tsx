@@ -74,7 +74,7 @@ export default function DiaryView({ entry, date, onBack }: DiaryViewProps) {
       {/* 헤더 */}
       <div className="flex items-center gap-4 mb-8">
         <Button
-          variant="default"
+          variant="outline"
           size="sm"
           onClick={onBack}
           className="hover:bg-purple-50"

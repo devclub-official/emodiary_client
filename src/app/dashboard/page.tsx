@@ -84,13 +84,16 @@ export default function DashboardPage() {
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <Button onClick={handleWriteDiary} className="btn-game h-11 px-6">
+              <Button
+                onClick={handleWriteDiary}
+                className="btn-game h-11 px-6 border-accent-foreground"
+              >
                 <PenTool className="w-4 h-4 mr-2" />
                 일기 작성
               </Button>
               <LogoutButton />
               <Button
-                variant="default"
+                variant="outline"
                 className="btn-game h-11 px-4"
                 onClick={() => router.push("/settings")}
               >
@@ -169,7 +172,7 @@ export default function DashboardPage() {
                 날짜를 클릭하여 일기를 작성하거나 확인하세요
               </p>
             </div>
-            <Card className="p-6 card-3d max-sm:p-2">
+            <Card className="p-6 card-3d max-sm:p-2 border-2">
               <Calendar onDateClick={handleDateClick} />
             </Card>
           </div>

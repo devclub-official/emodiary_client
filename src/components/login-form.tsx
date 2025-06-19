@@ -49,7 +49,7 @@ export default function LoginForm() {
 
       <form action={handleSocialLogin} className="space-y-4">
         <Button
-          variant="default"
+          variant="outline"
           className="w-full h-14 text-base bg-white hover:bg-gray-50 text-gray-700 border-gray-300 hover:border-gray-400 transition-all duration-300 rounded-2xl font-bold shadow-lg hover:shadow-xl"
           type="submit"
           name="provider"

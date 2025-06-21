@@ -3,7 +3,15 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { Bell, Clock, Shield, AlertCircle, CheckCircle } from "lucide-react";
+import {
+  Bell,
+  Clock,
+  Shield,
+  AlertCircle,
+  CheckCircle,
+  Smartphone,
+} from "lucide-react";
+import { useFCM } from "@/hooks/useFCM";
 
 export default function NotificationSettings() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
@@ -11,6 +19,15 @@ export default function NotificationSettings() {
   const [permission, setPermission] =
     useState<NotificationPermission>("default");
   const [isLoading, setIsLoading] = useState(false);
+
+  // FCM 훅 사용
+  const {
+    token,
+    isLoading: fcmLoading,
+    error: fcmError,
+    requestFCMToken,
+    hasFCMToken,
+  } = useFCM();
 
   // 브라우저 알림 권한 상태 확인
   useEffect(() => {
@@ -48,12 +65,17 @@ export default function NotificationSettings() {
   };
 
   // 알림 토글 핸들러
-  const handleNotificationToggle = (checked: boolean) => {
+  const handleNotificationToggle = async (checked: boolean) => {
     if (checked && permission !== "granted") {
-      requestNotificationPermission();
-    } else {
-      setNotificationsEnabled(checked);
+      await requestNotificationPermission();
     }
+
+    if (checked && permission === "granted" && !hasFCMToken) {
+      // FCM 토큰 생성 및 백엔드 저장
+      await requestFCMToken();
+    }
+
+    setNotificationsEnabled(checked);
   };
 
   // 시간 변경 핸들러
@@ -131,6 +153,53 @@ export default function NotificationSettings() {
         )}
       </div>
 
+      {/* FCM 토큰 상태 */}
+      <div className="p-4 border-b border-border">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <Smartphone className="w-4 h-4 text-foreground" />
+            <span className="text-sm font-medium text-foreground">
+              푸시 알림 토큰
+            </span>
+          </div>
+          <div
+            className={`flex items-center gap-1 ${
+              hasFCMToken ? "text-green-600" : "text-gray-600"
+            }`}
+          >
+            {hasFCMToken ? (
+              <CheckCircle className="w-4 h-4 text-green-500" />
+            ) : (
+              <AlertCircle className="w-4 h-4 text-gray-500" />
+            )}
+            <span className="text-xs font-medium">
+              {hasFCMToken ? "등록됨" : "미등록"}
+            </span>
+          </div>
+        </div>
+
+        {fcmError && (
+          <div className="text-xs text-red-600 mb-2">오류: {fcmError}</div>
+        )}
+
+        {!hasFCMToken && permission === "granted" && (
+          <Button
+            onClick={requestFCMToken}
+            disabled={fcmLoading}
+            size="sm"
+            className="w-full btn-game"
+          >
+            {fcmLoading ? "토큰 생성 중..." : "푸시 알림 설정"}
+          </Button>
+        )}
+
+        {token && (
+          <div className="text-xs text-muted-foreground mt-2">
+            토큰: {token.substring(0, 20)}...
+          </div>
+        )}
+      </div>
+
       {/* 알림 활성화 토글 */}
       <div className="flex items-center justify-between p-4">
         <div>
@@ -145,14 +214,16 @@ export default function NotificationSettings() {
           </p>
         </div>
         <Switch
-          checked={notificationsEnabled && permission === "granted"}
+          checked={
+            notificationsEnabled && permission === "granted" && hasFCMToken
+          }
           onCheckedChange={handleNotificationToggle}
-          disabled={permission !== "granted"}
+          disabled={permission !== "granted" || fcmLoading}
         />
       </div>
 
       {/* 알림 시간 설정 */}
-      {notificationsEnabled && permission === "granted" && (
+      {notificationsEnabled && permission === "granted" && hasFCMToken && (
         <div className="p-4">
           <div className="flex items-center gap-2 mb-3">
             <Clock className="w-4 h-4 text-foreground" />

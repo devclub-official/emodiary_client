@@ -99,14 +99,26 @@ const MOTIVATIONAL_QUOTES = [
   "마음의 날씨를 기록하는 용기 💪",
 ];
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
-  isAuthenticated: false,
-  isLoading: false,
-  login: (user) => set({ user, isAuthenticated: true, isLoading: false }),
-  logout: () => set({ user: null, isAuthenticated: false, isLoading: false }),
-  setLoading: (loading) => set({ isLoading: loading }),
-}));
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      user: null,
+      isAuthenticated: false,
+      isLoading: false,
+      login: (user) => set({ user, isAuthenticated: true, isLoading: false }),
+      logout: () =>
+        set({ user: null, isAuthenticated: false, isLoading: false }),
+      setLoading: (loading) => set({ isLoading: loading }),
+    }),
+    {
+      name: "auth-storage", // localStorage key
+      partialize: (state) => ({
+        user: state.user,
+        isAuthenticated: state.isAuthenticated,
+      }), // isLoading은 저장하지 않음
+    }
+  )
+);
 
 export const useDiaryStore = create<DiaryState>((set, get) => ({
   entries: [],

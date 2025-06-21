@@ -1,12 +1,14 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Calendar from "@/components/calendar";
 import { useAuthStore, useThemeStore } from "@/lib/store";
 import { useDiaryStore } from "@/lib/store";
 import LogoutButton from "@/components/logout-button";
+import { registerFCMOnLogin } from "@/lib/fcm-utils";
 import {
   PenTool,
   BarChart3,
@@ -18,8 +20,24 @@ const { formatDate } = require("@/lib/calendar");
 
 export default function DashboardPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { user } = useAuthStore();
   const { currentTheme, motivationalQuote } = useThemeStore();
+
+  // 로그인 성공 시 FCM 토큰 등록
+  useEffect(() => {
+    const loginSuccess = searchParams.get("login");
+
+    if (loginSuccess === "success" && user?.id) {
+      // FCM 토큰 등록
+      registerFCMOnLogin(parseInt(user.id));
+
+      // URL에서 쿼리 파라미터 제거
+      const url = new URL(window.location.href);
+      url.searchParams.delete("login");
+      window.history.replaceState({}, "", url.toString());
+    }
+  }, [searchParams, user?.id]);
 
   const handleDateClick = (date: string) => {
     // 현재 날짜와 비교하여 미래 날짜는 접근 불가
